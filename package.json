@@ -1,6 +1,6 @@
 {
-  "name": "react-native-datatable-component",
-  "version": "2.1.12",
+  "name": "react-native-datatable-component-adalo",
+  "version": "1.0.0",
   "description": "A React Native datatable component for dynamically perform actions like display, sorting, select, custom design, delete & touch events.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MuhammadRafeh/react-native-datatable-component.git"
+    "url": "git+https://github.com/Ejaj-Ahamed/react-native-datatable-component.git"
   },
   "keywords": [
     "react-native-datatable",
@@ -30,11 +30,11 @@
   "author": "Muhammad Rafeh <muhammadrafehatique@outlook.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/MuhammadRafeh/react-native-datatable-component/issues"
+    "url": "https://github.com/Ejaj-Ahamed/react-native-datatable-component/issues"
   },
   "peerDependencies": {
     "react": "17.0.1",
     "react-native": "0.64.2"
   },
-  "homepage": "https://github.com/MuhammadRafeh/react-native-datatable-component#readme"
+  "homepage": "https://github.com/Ejaj-Ahamed/react-native-datatable-component#readme"
 }

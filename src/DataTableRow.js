@@ -7,7 +7,7 @@ import CheckBox from './CheckBox';
 const DataTableRow = React.memo((props) => {
 
     //data is object
-    const { data, colNames, defaultEachColumnWidth, mapColNameToType, widthOfLine, handleOnRowSelect, eachColWidth } = props;
+    const { data, colNames, defaultEachColumnWidth, mapColNameToType, widthOfLine, handleOnRowSelect, eachColWidth,cellBorderColor,cellBorderWidth,tableCellStyle } = props;
 
     let color = 'black';
     let backgroundColor = 'transparent';
@@ -21,7 +21,12 @@ const DataTableRow = React.memo((props) => {
     return (
         <>
 
-            <View style={[styles.rowContainer, { backgroundColor }]}>
+            <View style={[styles.rowContainer, { backgroundColor },{
+                 borderRightColor:cellBorderColor,
+                 borderRightWidth:cellBorderWidth,
+                 borderBottomWidth:cellBorderWidth==0?1:cellBorderWidth,
+                 borderBottomColor:cellBorderColor
+            }]}>
                 {
                     colNames.map((name, index) => {
                         const colWidth = eachColWidth[name] == undefined ? defaultEachColumnWidth : eachColWidth[name];
@@ -39,14 +44,17 @@ const DataTableRow = React.memo((props) => {
                         }
 
                         return (
-                            <View key={index} style={[styles.rowCellContainer, { width: colWidth }]}>
+                            <View key={index} style={[styles.rowCellContainer, { width: colWidth },{
+                                borderLeftColor:cellBorderColor,
+                                borderLeftWidth:cellBorderWidth
+                            }]}>
                                 {
                                     textAlign == 'center' ? (
                                         <View style={{ width: '100%', height: 20, alignItems: 'center', justifyContent: 'center' }}>
                                             <CheckBox info={{ name, id: data.id }} handleOnRowSelect={handleOnRowSelect} initialVal={data[name] == true ? true : false} />
                                         </View>
                                     ) : (
-                                        <Text style={[styles.rowCellText, { paddingLeft, paddingRight, textAlign, color }]}>{data[name]}</Text>
+                                        <Text style={[styles.rowCellText, { paddingLeft, paddingRight, textAlign, color }, tableCellStyle]}>{data[name]}</Text>
                                     )
                                 }
                             </View>
@@ -56,7 +64,7 @@ const DataTableRow = React.memo((props) => {
                 }
             </View>
 
-            <Line row width={widthOfLine} />
+            {/* <Line row width={widthOfLine}  /> */}
 
         </>
     );
@@ -68,7 +76,7 @@ const styles = StyleSheet.create({
     rowContainer: {
         flexDirection: 'row',
         backgroundColor: 'green',
-        paddingHorizontal: 10
+        marginHorizontal: 10
     },
     rowCellText: {
         color: 'black',

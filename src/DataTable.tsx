@@ -22,8 +22,11 @@ interface PropTypes {
     noOfPages?: number;
     onRowSelect?: (anyVariable) => object;
     backgroundColor?: string;
+    cellBorderColor?: string;
+    cellBorderWidth?: number;
     doSort?: boolean;
     headerLabelStyle?: object;
+    cellLabelStyle?: object;
 }
 
 class DataTable extends React.Component<PropTypes> {
@@ -196,9 +199,11 @@ class DataTable extends React.Component<PropTypes> {
                     handleColPress={this.handleColPress}
                     doSort={this.props?.doSort}
                     style={this.props?.headerLabelStyle}
+                    cellBorderColor={this.props.cellBorderColor}
+                    cellBorderWidth={this.props.cellBorderWidth}
                 />
 
-                <Line width={this.state.widthOfContainer} header />
+                {/* <Line width={this.state.widthOfContainer} header height={this.props.cellBorderWidth} /> */}
                 <ScrollView>
                     {
                         this.state.displayData.map((item, index) => (
@@ -208,6 +213,9 @@ class DataTable extends React.Component<PropTypes> {
                                 key={index}
                                 index={index}
                                 data={item}
+                                tableCellStyle={this.props?.cellLabelStyle}
+                                cellBorderColor={this.props.cellBorderColor}
+                                cellBorderWidth={this.props.cellBorderWidth}
                                 mapColNameToType={this.state.mapColNameToType}
                                 colNames={this.state.colNames}
                                 eachColWidth={this.state.eachColWidth}

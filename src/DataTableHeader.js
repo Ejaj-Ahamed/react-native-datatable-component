@@ -6,12 +6,18 @@ const PADDING_TOP = 20;
 
 const DataTableHeader = React.memo((props) => {
 
-    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress, doSort, eachColWidth, style } = props;
+    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress,
+        doSort, eachColWidth, style, cellBorderColor, cellBorderWidth } = props;
 
     const isDoSort = doSort == false ? false : true;
 
     return (
-        <View style={styles.headerContainer}>
+        <View style={[styles.headerContainer, {
+            borderRightWidth: cellBorderWidth,
+            borderRightColor: cellBorderColor,
+            borderBottomWidth:cellBorderWidth==0?1:0,
+            borderBottomColor:cellBorderColor
+        }]}>
             {
                 colNames.map((colName, index) => {
                     const colWidth = eachColWidth[colName] == undefined ? defaultEachColumnWidth : eachColWidth[colName];
@@ -28,26 +34,43 @@ const DataTableHeader = React.memo((props) => {
                     }
                     if (colType == COL_TYPES.CHECK_BOX) {
                         return (
-                            <View key={index} style={[styles.headerRow, { width: colWidth, justifyContent }]}>
+                            <View key={index} style={[styles.headerRow, { width: colWidth, justifyContent }, {
+                                borderLeftColor: cellBorderColor,
+                                borderLeftWidth: cellBorderWidth,
+                                borderTopWidth: cellBorderWidth,
+                                borderTopColor: cellBorderColor
+                            }]}>
                                 <Text style={[styles.headerLabel, { textAlign: 'center' }, style]} adjustsFontSizeToFit={true} numberOfLines={20}>{' ' + colName[0].toUpperCase() + colName.substring(1)}</Text>
                             </View>
                         )
                     }
                     if (isDoSort) {
                         return (
-                            <TouchableOpacity key={index} style={[styles.headerRow, { width: colWidth, paddingLeft, paddingRight }]} onPress={handleColPress.bind(null, colName)}>
-                                <View style={{ flex: paddingRight == 13 ? 1 : undefined, alignItems: paddingRight == 13 ? 'flex-end' : undefined, minWidth: 8 }}>
-                                    <Image source={require('../assets/doubleArrow.png')} />
-                                </View>
-                                <View style={{ width: paddingLeft == 13 ? '71%' : undefined }}>
-                                    <Text
-                                        adjustsFontSizeToFit={true}
-                                        numberOfLines={20}
-                                        style={[styles.headerLabel, style]}>
-                                        {' ' + colName[0].toUpperCase() + colName.substring(1)}
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
+                            <View key={index} style={[styles.headerRow, { width: colWidth, paddingLeft, paddingRight },{
+                                borderLeftColor: cellBorderColor,
+                                borderLeftWidth: cellBorderWidth,
+                                borderTopWidth: cellBorderWidth,
+                                borderTopColor: cellBorderColor,
+                                borderBottomWidth: cellBorderWidth,
+                                borderBottomColor: cellBorderColor
+                            }]}>
+                                <TouchableOpacity onPress={handleColPress.bind(null, colName)} style={{
+                                    width: "100%",
+                                    flexDirection: "row",
+                                }}>
+                                    <View style={{ flex: paddingRight == 13 ? 1 : undefined, alignItems: paddingRight == 13 ? 'flex-end' : undefined, minWidth: 8 }}>
+                                        <Image source={require('../assets/doubleArrow.png')} />
+                                    </View>
+                                    <View style={{ width: paddingLeft == 13 ? '71%' : undefined }}>
+                                        <Text
+                                            adjustsFontSizeToFit={true}
+                                            numberOfLines={20}
+                                            style={[styles.headerLabel, style]}>
+                                            {' ' + colName[0].toUpperCase() + colName.substring(1)}
+                                        </Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
                         );
                     } else {
                         const isLeft = paddingLeft == 1 ? false : true;
@@ -72,7 +95,7 @@ export default DataTableHeader;
 const styles = StyleSheet.create({
     headerContainer: {
         flexDirection: 'row',
-        paddingHorizontal: 10,
+        marginHorizontal: 10,
         alignItems: 'center',
     },
     headerRow: {
