@@ -6,7 +6,7 @@ const PADDING_TOP = 20;
 
 const DataTableHeader = React.memo((props) => {
 
-    const { colNames, mapColNameToType, defaultEachColumnWidth, handleColPress,
+    const { colNames,colNamez, mapColNameToType, defaultEachColumnWidth, handleColPress,
         doSort, eachColWidth, style, cellBorderColor, cellBorderWidth } = props;
 
     const isDoSort = doSort == false ? false : true;
@@ -19,7 +19,8 @@ const DataTableHeader = React.memo((props) => {
             borderBottomColor:cellBorderColor
         }]}>
             {
-                colNames.map((colName, index) => {
+                colNamez.map((colNamex, index) => {
+                    let colName = colNamex['name'];
                     const colWidth = eachColWidth[colName] == undefined ? defaultEachColumnWidth : eachColWidth[colName];
                     const colType = mapColNameToType[colName]
                     const justifyContent = (colType == COL_TYPES.STRING || colType == null) ? 'flex-start' : (colType == COL_TYPES.CHECK_BOX || colType == COL_TYPES.RADIO) ? 'center' : 'flex-end'
@@ -40,7 +41,7 @@ const DataTableHeader = React.memo((props) => {
                                 borderTopWidth: cellBorderWidth,
                                 borderTopColor: cellBorderColor
                             }]}>
-                                <Text style={[styles.headerLabel, { textAlign: 'center' }, style]} adjustsFontSizeToFit={true} numberOfLines={20}>{' ' + colName[0].toUpperCase() + colName.substring(1)}</Text>
+                                <Text style={[styles.headerLabel, { textAlign: 'center' }, style]} adjustsFontSizeToFit={true} numberOfLines={20}>{' ' + colName}</Text>
                             </View>
                         )
                     }
@@ -66,7 +67,7 @@ const DataTableHeader = React.memo((props) => {
                                             adjustsFontSizeToFit={true}
                                             numberOfLines={20}
                                             style={[styles.headerLabel, style]}>
-                                            {' ' + colName[0].toUpperCase() + colName.substring(1)}
+                                            {' ' + colName}
                                         </Text>
                                     </View>
                                 </TouchableOpacity>
@@ -80,7 +81,7 @@ const DataTableHeader = React.memo((props) => {
                                     adjustsFontSizeToFit={true}
                                     numberOfLines={20}
                                 >
-                                    {colName[0].toUpperCase() + colName.substring(1)}</Text>
+                                    {colName}</Text>
                             </View>
                         )
                     }

@@ -18,6 +18,7 @@ const TOTAL_WIDTH = 100;
 interface PropTypes {
     data?: object[];
     colNames?: string[];
+    colNamez?: object[];
     colSettings?: object[];
     noOfPages?: number;
     onRowSelect?: (anyVariable) => object;
@@ -193,6 +194,7 @@ class DataTable extends React.Component<PropTypes> {
 
                 <DataTableHeader
                     colNames={this.state.colNames}
+                    colNamez={this.props.colNamez}
                     mapColNameToType={this.state.mapColNameToType}
                     defaultEachColumnWidth={this.state.defaultEachColumnWidth}
                     eachColWidth={this.state.eachColWidth}
