@@ -65,7 +65,7 @@ const DataTableHeader = React.memo((props) => {
                                     <View style={{ width: paddingLeft == 13 ? '71%' : undefined }}>
                                         <Text
                                             adjustsFontSizeToFit={true}
-                                            numberOfLines={20}
+                                            numberOfLines={1}
                                             style={[styles.headerLabel, style]}>
                                             {' ' + colName}
                                         </Text>
