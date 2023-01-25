@@ -7,7 +7,7 @@ const PADDING_TOP = 20;
 const DataTableHeader = React.memo((props) => {
 
     const { colNames,colNamez, mapColNameToType, defaultEachColumnWidth, handleColPress,
-        doSort, eachColWidth, style, cellBorderColor, cellBorderWidth } = props;
+        doSort, eachColWidth, style, cellBorderColor, cellBorderWidth,cellWidthz } = props;
 
     const isDoSort = doSort == false ? false : true;
 
@@ -21,7 +21,8 @@ const DataTableHeader = React.memo((props) => {
             {
                 colNamez.map((colNamex, index) => {
                     let colName = colNamex['name'];
-                    const colWidth = eachColWidth[colName] == undefined ? defaultEachColumnWidth : eachColWidth[colName];
+                    const colWidth = cellWidthz || 150;
+                    // const colWidth = eachColWidth[colName] == undefined ? defaultEachColumnWidth : eachColWidth[colName];
                     const colType = mapColNameToType[colName]
                     const justifyContent = (colType == COL_TYPES.STRING || colType == null) ? 'flex-start' : (colType == COL_TYPES.CHECK_BOX || colType == COL_TYPES.RADIO) ? 'center' : 'flex-end'
                     let paddingLeft = 0;

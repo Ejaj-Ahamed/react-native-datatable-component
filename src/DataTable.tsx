@@ -28,6 +28,7 @@ interface PropTypes {
     doSort?: boolean;
     headerLabelStyle?: object;
     cellLabelStyle?: object;
+    cellWidthz?: number;
 }
 
 class DataTable extends React.Component<PropTypes> {
@@ -191,40 +192,45 @@ class DataTable extends React.Component<PropTypes> {
                 onLayout={e => {
                     this.setState({ widthOfContainer: e.nativeEvent.layout.width })
                 }}>
+                <ScrollView horizontal>
+                    <View>
+                    <DataTableHeader
+                        colNames={this.state.colNames}
+                        colNamez={this.props.colNamez}
+                        mapColNameToType={this.state.mapColNameToType}
+                        defaultEachColumnWidth={this.state.defaultEachColumnWidth}
+                        eachColWidth={this.state.eachColWidth}
+                        handleColPress={this.handleColPress}
+                        doSort={this.props?.doSort}
+                        style={this.props?.headerLabelStyle}
+                        cellBorderColor={this.props.cellBorderColor}
+                        cellBorderWidth={this.props.cellBorderWidth}
+                        cellWidthz={this.props.cellWidthz}
+                    />
 
-                <DataTableHeader
-                    colNames={this.state.colNames}
-                    colNamez={this.props.colNamez}
-                    mapColNameToType={this.state.mapColNameToType}
-                    defaultEachColumnWidth={this.state.defaultEachColumnWidth}
-                    eachColWidth={this.state.eachColWidth}
-                    handleColPress={this.handleColPress}
-                    doSort={this.props?.doSort}
-                    style={this.props?.headerLabelStyle}
-                    cellBorderColor={this.props.cellBorderColor}
-                    cellBorderWidth={this.props.cellBorderWidth}
-                />
-
-                {/* <Line width={this.state.widthOfContainer} header height={this.props.cellBorderWidth} /> */}
-                <ScrollView>
-                    {
-                        this.state.displayData.map((item, index) => (
-                            <DataTableRow
-                                handleOnRowSelect={this.handleOnRowSelect}
-                                widthOfLine={this.state.widthOfContainer}
-                                key={index}
-                                index={index}
-                                data={item}
-                                tableCellStyle={this.props?.cellLabelStyle}
-                                cellBorderColor={this.props.cellBorderColor}
-                                cellBorderWidth={this.props.cellBorderWidth}
-                                mapColNameToType={this.state.mapColNameToType}
-                                colNames={this.state.colNames}
-                                eachColWidth={this.state.eachColWidth}
-                                defaultEachColumnWidth={this.state.defaultEachColumnWidth}
-                            />
-                        ))
-                    }
+                    {/* <Line width={this.state.widthOfContainer} header height={this.props.cellBorderWidth} /> */}
+                    <ScrollView >
+                        {
+                            this.state.displayData.map((item, index) => (
+                                <DataTableRow
+                                    handleOnRowSelect={this.handleOnRowSelect}
+                                    widthOfLine={this.state.widthOfContainer}
+                                    key={index}
+                                    index={index}
+                                    data={item}
+                                    tableCellStyle={this.props?.cellLabelStyle}
+                                    cellBorderColor={this.props.cellBorderColor}
+                                    cellBorderWidth={this.props.cellBorderWidth}
+                                    mapColNameToType={this.state.mapColNameToType}
+                                    colNames={this.state.colNames}
+                                    eachColWidth={this.state.eachColWidth}
+                                    cellWidthz={this.props.cellWidthz}
+                                    defaultEachColumnWidth={this.state.defaultEachColumnWidth}
+                                />
+                            ))
+                        }
+                    </ScrollView>
+                    </View>
                 </ScrollView>
                 <DataTableFooter
                     start={this.state.startDataArray}
