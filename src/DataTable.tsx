@@ -209,7 +209,7 @@ class DataTable extends React.Component<PropTypes> {
                     />
 
                     {/* <Line width={this.state.widthOfContainer} header height={this.props.cellBorderWidth} /> */}
-                    <ScrollView >
+                    <ScrollView nestedScrollEnabled={true}>
                         {
                             this.state.displayData.map((item, index) => (
                                 <DataTableRow
